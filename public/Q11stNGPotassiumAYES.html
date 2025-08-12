@@ -17,21 +17,18 @@
 
   <script>
 
-    var x = prompt("Enter age", "0");
-    var y = prompt("Enter maxAge", "0");
-    var z = prompt("Enter numPerDay", "0");
-    var totalRequired = (numPerDay * 365) * (maxAge - age);
-    alert(totalRequired);
+    let age = window.prompt("Enter your age", "14"); 
+    let maxAge = window.prompt("Enter what you think your maxAge is", "100");
+    let numPerDay = window.prompt("Enter how many slices of pizzas you eat in a day", "2");
 
-    document.write("You will need ");
-    document.write(totalRequired);
-    document.write(" pizzas to last you until the ripe old age of ");
-    document.write(maxAge);
-    document.write("<br><br>");
-    document.write("Citations:<br>");
-    document.write("Mozilla Developer Network (MDN Web Docs). CSS reference. Mozilla. https://developer.mozilla.org/en-US/docs/Web/CSS/Reference<br>");
-    document.write("W3Schools.com. CSS tutorial. Refsnes Data. https://www.w3schools.com/css/<br>");
-    document.write("Coyier, C., & Hou, D. CSS-Tricks almanac. CSS-Tricks. https://css-tricks.com/almanac/");
+    let totalRequired = (numPerDay * 365) * (maxAge - age);
+
+    if (!sure) {
+      console.log("You will need ", totalRequired, " pizzas to last you until the ripe age of ", maxAge);
+    }
+    else {
+      console.log("Please try again!");
+    }
   </script>
 
 </body>
