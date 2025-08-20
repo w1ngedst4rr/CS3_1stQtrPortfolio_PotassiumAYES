@@ -1,46 +1,91 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <style>
+    body {
+      background-color: #f3e8ff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      color: #2b0033;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input {
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #aaa;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      background-color: #7c3aed;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #output {
+      margin-top: 25px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #7c3aed;
+    }
+
+    .reference {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
+</head>
 <body>
 
-    <h2>Q1 2nd Graded Exercise submitted by AYES, Leian Sandhel A. of 9 - Potassium</h2>
+  <h2>Q1 2nd Graded Exercise submitted by AYES, Leian Sandhel A. of 9 - Potassium</h2>
 
-    <label>Meal Price:</label>
-    <input type="number" id="mealPrice" placeholder="Enter Meal Price">
-    <br><br>
+  <label>Meal Price:</label>
+  <input type="number" id="mealPrice" placeholder="Enter Meal Price">
 
-    <label>Tip:</label>
-    <input type="number" id="tip" placeholder="Enter Tip">
-    <br><br>
+  <label>Tip:</label>
+  <input type="number" id="tip" placeholder="Enter Tip">
 
-    <label>Service Charge (%):</label>
-    <input type="number" id="sc" placeholder="Enter Service Charge">
-    <br><br>
+  <label>Service Charge (%):</label>
+  <input type="number" id="sc" placeholder="Enter Service Charge">
 
-    <button onclick="totalMeal()">Accept Input</button>
+  <button onclick="totalMeal()">Accept Input</button>
 
-    <p id="output">Total Meal: </p>
+  <p id="output">Total Meal: </p>
 
-    <script>
-        function totalMeal() {
-            var mp = parseFloat(document.getElementById("mealPrice").value);
-            var tip = parseFloat(document.getElementById("tip").value);
-            var sc = parseFloat(document.getElementById("sc").value);
+  <script>
+    function totalMeal() {
+      var mp = parseFloat(document.getElementById("mealPrice").value);
+      var tip = parseFloat(document.getElementById("tip").value);
+      var sc = parseFloat(document.getElementById("sc").value);
 
-            if (isNaN(mp) || isNaN(tip) || isNaN(sc)) {
-                document.getElementById("output").innerHTML = "Please fill in all fields.";
-                return;
-            }
+      if (isNaN(mp) || isNaN(tip) || isNaN(sc)) {
+        document.getElementById("output").innerHTML = "Please fill in all fields.";
+        return;
+      }
 
-            var totalCost = mp + tip + (sc / 100 * mp);
+      var totalCost = mp + tip + (sc / 100 * mp);
 
-            document.getElementById("output").innerHTML = "Total Meal: " + totalCost.toFixed(2);
-        }
-    </script>
-    
-    <div class="reference">
+      document.getElementById("output").innerHTML = "Total Meal: " + totalCost.toFixed(2);
+    }
+  </script>
+
+  <div class="reference">
     References: <br>
     W3Schools. (n.d.). W3Schools Online Web Tutorials. <a href="https://www.w3schools.com" target="_blank">https://www.w3schools.com</a>
-    </div>
+  </div>
 
 </body>
 </html>
