@@ -9,20 +9,57 @@
       padding: 50px;
       color: #000;
     }
+    input {
+      margin: 5px;
+      padding: 8px;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #7c3aed;
+      color: white;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
 
   <h1>First Non-Graded Exercise in First Quarter!</h1>
 
+  <p>Enter your age:</p>
+  <input type="number" id="age" placeholder="14">
+
+  <p>Enter your max age:</p>
+  <input type="number" id="maxAge" placeholder="100">
+
+  <p>Enter number of pizza slices per day:</p>
+  <input type="number" id="numPerDay" placeholder="2">
+
+  <br>
+  <button onclick="calculatePizza()">Calculate</button>
+
+  <div id="result"></div>
+
   <script>
-    let age = parseInt(window.prompt("Enter your age:", "14")); 
-    let maxAge = parseInt(window.prompt("Enter what you think your max age is:", "100"));
-    let numPerDay = parseInt(window.prompt("Enter how many slices of pizza you eat in a day:", "2"));
+    function calculatePizza() {
+      let age = parseInt(document.getElementById("age").value);
+      let maxAge = parseInt(document.getElementById("maxAge").value);
+      let numPerDay = parseInt(document.getElementById("numPerDay").value);
 
-    let totalRequired = (numPerDay * 365) * (maxAge - age);
+      let totalRequired = (numPerDay * 365) * (maxAge - age);
 
-    alert("You will need " + totalRequired + " slices of pizza to last you until the ripe age of " + maxAge);
+      document.getElementById("result").innerHTML =
+        "You will need " + totalRequired + " slices of pizza to last you until the ripe age of " + maxAge + ".";
+    }
   </script>
 
 </body>
