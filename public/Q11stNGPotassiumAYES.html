@@ -16,19 +16,13 @@
   <h1>First Non-Graded Exercise in First Quarter!</h1>
 
   <script>
-
-    let age = window.prompt("Enter your age:", "14"); 
-    let maxAge = window.prompt("Enter what you think your maxAge is:", "100");
-    let numPerDay = window.prompt("Enter how many slices of pizzas you eat in a day:", "2");
+    let age = parseInt(window.prompt("Enter your age:", "14")); 
+    let maxAge = parseInt(window.prompt("Enter what you think your max age is:", "100"));
+    let numPerDay = parseInt(window.prompt("Enter how many slices of pizza you eat in a day:", "2"));
 
     let totalRequired = (numPerDay * 365) * (maxAge - age);
 
-    if (!sure) {
-      alert("You will need " + totalRequired + " pizzas to last you until the ripe age of " maxAge);
-    }
-    else {
-      alert("Please run the code again!");
-    }
+    alert("You will need " + totalRequired + " slices of pizza to last you until the ripe age of " + maxAge);
   </script>
 
 </body>
