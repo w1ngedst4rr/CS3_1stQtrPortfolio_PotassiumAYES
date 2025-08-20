@@ -1,44 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AYES, Leian Sandhel A's Portfolio!!</title>
+  <title>Give me my Pizza!!</title></title>
   <style>
     body {
       background-color: #f3e8ff;
-      font-family: 'Arial', sans-serif;
-      white-space: pre-wrap;
+      font-family: Arial, sans-serif;
       padding: 30px;
       color: #2b0033;
     }
-
-    .lyrics {
-      margin-top: 20px;
-      background-color: #fff0ff;
-      padding: 20px;
-      border-radius: 12px;
-      border: 1px solid #d4aaff;
+    label {
+      display: block;
+      margin-top: 15px;
     }
-
-    .quote {
+    input {
+      padding: 5px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #aaa;
+    }
+    .result-box {
       margin-top: 25px;
-      font-style: italic;
-      text-align: right;
-      color: #5e007a;
+      padding: 10px;
+      border: 1px solid #aaa;
+      border-radius: 6px;
+      background: #fff;
+      min-height: 30px;
+      width: 300px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      background: #d4aaff;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>Give me my pizza!!</h1>
+  <h1>Pizza Calculator</h1>
+
+  <label>Enter your Age:</label>
+  <input type="number" id="age">
+
+  <label>Enter Max Age:</label>
+  <input type="number" id="maxAge">
+
+  <label>Enter Number of Pizzas per day:</label>
+  <input type="number" id="pizzas">
+
+  <button onclick="calculate()">Calculate</button>
+
+  <div class="result-box" id="result"></div>
 
   <script>
-document.write(`Enter your Age
-Enter your Max Age
-Enter Number of Pizzas
+    function calculate() {
+      let age = parseInt(document.getElementById("age").value);
+      let maxAge = parseInt(document.getElementById("maxAge").value);
+      let pizzas = parseInt(document.getElementById("pizzas").value);
 
-Result
+      if (!age || !maxAge || !pizzas) {
+        document.getElementById("result").innerText = "Please fill in all fields.";
+        return;
+      }
 
-`);
-</script>
-
+      let total = (maxAge - age) * pizzas * 365;
+      document.getElementById("result").innerText = 
+        "You will eat " + total + " pizzas in your lifetime.";
+    }
+  </script>
 </body>
 </html>
