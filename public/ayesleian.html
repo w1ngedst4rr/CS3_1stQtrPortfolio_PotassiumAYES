@@ -43,60 +43,58 @@
 <p id="message"></p>
 <p id="attempts"></p>
 
-    <script>
-    let secretWord = ["l","a","c","k","a","d","a","i","s","i","c","a","l"," ","-","l","e","i","a","n"];
-    let guessedWord = [];
-    let attemptsLeft = 7;
+  <script>
+  let secretWord = ["l","a","c","k","a","d","a","i","s","i","c","a","l"," ","-","l","e","i","a","n"];
+  let guessedWord = [];
+  let attemptsLeft = 7;
 
-    for (let i = 0; i < secretWord.length; i++) {
-      if (secretWord[i] === " " || secretWord[i] === "-") {
-        guessedWord[i] = secretWord[i];
-      } else {
-        guessedWord[i] = "_";
+  for (let i = 0; i < secretWord.length; i++) {
+    if (secretWord[i] === " " || secretWord[i] === "-") {
+      guessedWord[i] = secretWord[i];
+    } else {
+      guessedWord[i] = "_";
+    }
+  }
+
+  document.getElementById("wordDisplay").textContent = guessedWord.join(" ");
+  document.getElementById("attempts").textContent = "Attempts left: " + attemptsLeft;
+
+  function makeGuess() {
+    let guess = document.getElementById("guessInput").value.toLowerCase();
+    let correct = false;
+
+    if (guess === "" || guess.length > 1) {
+      document.getElementById("message").textContent = "Enter only one letter.";
+      document.getElementById("guessInput").value = "";
+      return;
+    }
+
+    let i = 0;
+    while (i < secretWord.length) {
+      if (secretWord[i] === guess) {
+        guessedWord[i] = guess;
+        correct = true;
       }
+      i++;
+    }
+
+    if (!correct) {
+      attemptsLeft--;
     }
 
     document.getElementById("wordDisplay").textContent = guessedWord.join(" ");
     document.getElementById("attempts").textContent = "Attempts left: " + attemptsLeft;
 
-    function makeGuess() {
-      let guess = document.getElementById("guessInput").value; 
-      let correct = false;
-
-      if (guess === "" || guess.length > 1) {
-        document.getElementById("message").textContent = "Enter only one letter.";
-        document.getElementById("guessInput").value = "";
-        return;
-      }
-
-      let i = 0;
-      while (i < secretWord.length) {
-        if (secretWord[i] === guess) {
-          guessedWord[i] = guess;
-          correct = true;
-        }
-        i++;
-      }
-
-      if (!correct) {
-        attemptsLeft--;
-      }
-
-      document.getElementById("wordDisplay").textContent = guessedWord.join(" ");
-      document.getElementById("attempts").textContent = "Attempts left: " + attemptsLeft;
-
-      if (guessedWord.join("") === secretWord.join("")) {
-        document.getElementById("message").textContent = "You guessed it: lackadaisical leian!";
-        document.getElementById("guessInput").disabled = true;
-      } else if (attemptsLeft <= 0) {
-        document.getElementById("message").textContent = "Game over! The word was: lackadaisical leian";
-        document.getElementById("guessInput").disabled = true;
-      } else {
-        document.getElementById("message").textContent = correct ? "Correct!" : "Nope! Try again!";
-      }
-
-      document.getElementById("guessInput").value = "";
+    if (guessedWord.join("") === secretWord.join("")) {
+      document.getElementById("message").textContent = "You guessed it: lackadaisical leian!";
+      document.getElementById("guessInput").disabled = true;
+    } else if (attemptsLeft <= 0) {
+      document.getElementById("message").textContent = "Game over! The word was: lackadaisical leian";
+      document.getElementById("guessInput").disabled = true;
+    } else {
+      document.getElementById("message").textContent = correct ? "Correct!" : "Nope! Try again!";
     }
-  </script>
-</body>
-</html>
+
+    document.getElementById("guessInput").value = "";
+  }
+</script>
