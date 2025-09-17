@@ -44,10 +44,11 @@
 <p id="attempts"></p>
 
 <script>
-    let secretWord = ["L","a","c","k","a","d","a","i","s","i","c","a","l"," ","-","L","e","i","a","n"];
+    let secretWord = ["L","a","c","k","a","d","a","i","s","i","c","a","l"," ","-","l","e","i","a","n"];
     let guessedWord = [];
     let attemptsLeft = 7;
 
+   
     for (let i = 0; i < secretWord.length; i++) {
       if (secretWord[i] === " " || secretWord[i] === "-") {
         guessedWord[i] = secretWord[i];
@@ -60,7 +61,7 @@
     document.getElementById("attempts").textContent = "Attempts left: " + attemptsLeft;
 
     function makeGuess() {
-      let guess = document.getElementById("guessInput").value.toLowerCase();
+      let guess = document.getElementById("guessInput").value;
       let correct = false;
 
       if (guess === "" || guess.length > 1) {
@@ -92,7 +93,7 @@
         document.getElementById("message").textContent = "Game over! The word was: Lackadaisical Leian";
         document.getElementById("guessInput").disabled = true;
       } else {
-        document.getElementById("message").textContent = correct ? "Correct!" : "Nope. Try again!";
+        document.getElementById("message").textContent = correct ? "Correct!" : "Nope! Try again!";
       }
 
       document.getElementById("guessInput").value = "";
