@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Proposal Letter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/1200x/88/ee/6e/88ee6ee66d0792078595c9fec2c66b40.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+
+    .scene-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 1s ease-in-out;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* slide envelope slightly left when open */
+    .scene-container.open {
+      transform: translateX(-180px);
+    }
+
+    .envelope {
+      position: relative;
+      width: 300px;
+      height: 180px;
+      cursor: pointer;
+      transition: transform 1s ease-in-out;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
+      z-index: 3;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .envelope-body {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #a00000;
+      border-radius: 8px;
+      z-index: 1;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 2;
+      transform-origin: top;
+      transition: transform 1s ease-in-out;
+    }
+
+    .flap::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-style: solid;
+      border-width: 90px 150px 0 150px;
+      border-color: #800000 transparent transparent transparent;
+      transform: translateY(0px) rotateX(0deg);
+      transform-origin: top;
+      transition: transform 1s ease-in-out;
+    }
+
+    .heart-seal {
+      position: absolute;
+      top: 55px;
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      background-color: #ffd700;
+      transform: translateX(-50%) rotate(-45deg);
+      z-index: 5;
+      transition: transform 1s ease-in-out;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .heart-seal::before,
+    .heart-seal::after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background-color: #ffd700;
+      border-radius: 50%;
+    }
+
+    .heart-seal::before {
+      top: -12.5px;
+      left: 0;
+    }
+
+    .heart-seal::after {
+      top: 0;
+      right: -12.5px;
+    }
+
+    /* open animation */
+    .envelope.open .flap::before {
+      transform: rotateX(180deg) translateY(-180px);
+    }
+
+    .envelope.open .heart-seal {
+      transform: translateX(-50%) rotate(-45deg) rotate(180deg);
+    }
+
+    .proposal-area {
+      position: relative;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 1s ease-in-out 1s, transform 1s ease-in-out 1s;
+      text-align: center;
+      max-width: 320px;
+      margin-left: 80px;
+      z-index: 3;
+    }
+
+    .proposal-area.open {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .proposal-text-box {
+      background-color: rgba(220, 38, 38, 0.8);
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-top: 15px;
+      margin-bottom: 20px;
+      line-height: 1.4;
+      display: inline-block;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      font-size: 1.15rem;
+      max-width: 280px;
+    }
+
+    /* separate box for each choice */
+    .choice-box {
+      background-color: rgba(220, 38, 38, 0.7);
+      border-radius: 10px;
+      padding: 10px 15px;
+      margin: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .proposal-btn {
+      @apply px-6 py-3 font-bold text-lg rounded-full shadow-lg transition duration-200 ease-in-out transform hover:scale-105;
+    }
+
+    .yes-btn {
+      @apply bg-green-600 text-white hover:bg-green-700;
+    }
+
+    .no-btn {
+      @apply bg-red-600 text-white hover:bg-red-700;
+    }
+
+    .result-message {
+      @apply text-white text-xl font-semibold;
+    }
+
+    .result-message strong {
+      @apply block text-3xl sm:text-4xl font-extrabold mb-4;
+    }
+  </style>
+
+  <script>
+    function openEnvelope() {
+      const sceneContainer = document.getElementById('sceneContainer');
+      const proposalArea = document.getElementById('proposalArea');
+      const envelope = document.getElementById('envelope');
+
+      if (envelope.classList.contains('open')) return;
+
+      sceneContainer.classList.add('open');
+      envelope.classList.add('open');
+      envelope.style.cursor = 'default';
+
+      setTimeout(() => {
+        proposalArea.classList.add('open');
+      }, 800);
+    }
+
+    function handleYes() {
+      const resultDisplay = document.getElementById('resultDisplay');
+      resultDisplay.innerHTML = `
+        <div class="result-message text-green-400">
+          <strong class="text-green-400 animate-pulse">🎉 YES! 🎉</strong>
+          Let’s spend every sunrise and sunset side by side.
+        </div>`;
+      document.getElementById('actionButtons').classList.add('hidden');
+    }
+
+    function handleNo() {
+      const actionButtons = document.getElementById('actionButtons');
+      actionButtons.innerHTML = `
+        <div class="result-message text-red-400 mb-4">
+          💔 Denied (But it's okay!)
+        </div>
+        <div class="choice-box">
+          <button id="yesBtn" class="proposal-btn yes-btn" onclick="handleYes()">
+            Yes, I Will!
+          </button>
+        </div>`;
+      document.getElementById('yesBtn').addEventListener('click', handleYes);
+    }
+
+    window.onload = function () {
+      document.getElementById('envelope').addEventListener('click', openEnvelope);
+      document.getElementById('yesBtn').addEventListener('click', handleYes);
+      document.getElementById('noBtn').addEventListener('click', handleNo);
+    };
+  </script>
+</head>
+
+<body>
+  <div id="sceneContainer" class="scene-container">
+    <div id="envelope" class="envelope">
+      <div class="envelope-body"></div>
+      <div class="flap">
+        <div class="heart-seal"></div>
+      </div>
+    </div>
+
+    <div id="proposalArea" class="proposal-area">
+      <div class="text-6xl mb-4">💍</div>
+
+      <div class="proposal-text-box text-white font-semibold">
+        Will you walk this lifetime with me, hand in hand, through every tomorrow?
+      </div>
+
+      <div id="actionButtons" class="flex flex-col items-center mt-4">
+        <div class="choice-box">
+          <button id="yesBtn" class="proposal-btn yes-btn">Yes, I Will!</button>
+        </div>
+        <div class="choice-box">
+          <button id="noBtn" class="proposal-btn no-btn">No, Sorry</button>
+        </div>
+      </div>
+
+      <div id="resultDisplay" class="mt-4"></div>
+    </div>
+  </div>
+</body>
+</html>
